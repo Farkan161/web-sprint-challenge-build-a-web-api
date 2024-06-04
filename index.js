@@ -12,3 +12,19 @@ I need this code, but don't know where, perhaps should make some middleware, don
 
 Pull your server into this file and start it!
 */
+const express = require('express')
+
+require('dotenv').config()
+
+const server = express()
+const projectRouter = require('./api/projects/projects-router');
+const actionRouter = require('./api/actions/actions-router');
+const port = process.env.PORT || 9000
+
+server.use(express.json());
+server.use('/api/projects', projectRouter);
+server.use('/api/actions', actionRouter);
+
+server.listen(port, () => {
+    console.log(`listening on ${port}`)
+})
